@@ -7,7 +7,10 @@ const router = require("./router/auth-router");
 const contactRoute = require("./router/contact-router");
 const jobApplicationRouter = require("./router/job_application-router");
 
-server.use(cors());
+server.use(cors({
+  origin: 'https://tech-nokri-frontend.onrender.com', // Apne frontend ka URL specify karein
+  credentials: true // Agar cookies ya authentication tokens bhi share karne hain toh
+));
 
 const PORT = 5012;
 
