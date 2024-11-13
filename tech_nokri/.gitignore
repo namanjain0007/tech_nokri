@@ -26,7 +26,7 @@
 # *.sw?
 
 # Ignore node_modules in frontend folder
-/frontend/node_modules/
+/tech_nokri/node_modules/
 
 # Ignore node_modules in backend folder
 /server/node_modules/
