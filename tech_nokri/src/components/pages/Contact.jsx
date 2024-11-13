@@ -21,7 +21,7 @@ const Contact = () => {
 
     try {
       const response = await axios.post(
-        https://tech-nokri.onrender.com/contactForm/contact",
+        "https://tech-nokri.onrender.com/contactForm/contact",
         contactData,
         {
           headers: {
