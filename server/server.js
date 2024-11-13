@@ -10,7 +10,7 @@ const jobApplicationRouter = require("./router/job_application-router");
 server.use(cors({
   origin: 'https://tech-nokri-frontend.onrender.com', // Apne frontend ka URL specify karein
   credentials: true // Agar cookies ya authentication tokens bhi share karne hain toh
-));
+}));
 
 const PORT = 5012;
 
