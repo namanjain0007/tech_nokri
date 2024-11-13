@@ -11,7 +11,7 @@ import FindJob from "./components/pages/FindJob";
 import Contact from "./components/pages/Contact";
 import NavBar from "./components/NavBar";
 import Login from "./components/pages/Login";
-import Register from "./components/pages/register";
+import Register from "./components/pages/Register";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import ScrollTop from "./components/ScrollTop";
