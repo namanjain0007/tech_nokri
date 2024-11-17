@@ -73,7 +73,7 @@ const App = () => {
         }
 
         // Agar token valid hai, server se validate karo
-        const response = await axios.get("http://localhost:5012/validate", {
+        const response = await axios.get("https://tech-nokri.onrender.com/validate", {
           headers: {
             Authorization: `Bearer ${token}`, // Token ko Authorization header me bhejna
           },
