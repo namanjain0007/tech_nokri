@@ -18,7 +18,7 @@ const Login = () => {
     // console.log(user);
 
     try {
-      const response = await axios.post("http://localhost:5012/login", user, {
+      const response = await axios.post("https://tech-nokri.onrender.com/login", user, {
         headers: {
           "Content-Type": "application/json",
         },

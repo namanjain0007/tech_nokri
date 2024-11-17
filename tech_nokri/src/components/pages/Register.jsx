@@ -89,7 +89,7 @@ const Register = () => {
     // });
     try {
       const response = await axios.post(
-        "http://localhost:5012/register",
+        "https://tech-nokri.onrender.com/register",
         formData,
         {
           headers: {
