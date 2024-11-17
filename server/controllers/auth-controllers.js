@@ -83,9 +83,10 @@ const login = async (req, res) => {
     if (user) {
       const token = await userExist.generateToken();
       res.cookie("jwt", token, {
-        expires: new Date(Date.now() + 25892000000), // 30 days ka time set kiya gaya hai
-        httpOnly: false, // Token ko client-side JavaScript access nahi kar sakta
-      });
+  httpOnly: true,
+  secure: true, // HTTPS ke liye zaroori
+  sameSite: "None", // Cross-origin ke liye
+});
 
       // console.log("ayush", res.getHeaders());
       res.status(200).json({
