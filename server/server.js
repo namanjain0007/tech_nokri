@@ -9,18 +9,16 @@ const router = require("./router/auth-router");
 const contactRoute = require("./router/contact-router");
 const jobApplicationRouter = require("./router/job_application-router");
 
+
+
 server.use(
   cors({
-    origin: "https://tech-nokri-frontend.onrender.com", // Frontend ka URL
+    origin: "https://tech-nokri-frontend.onrender.com", // Frontend ka deployed URL
     credentials: true, // Cookies allow karna
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Custom headers agar use ho rahe ho
   })
 );
-
-server.use(cookieParser());
-server.use(cors({
-  origin: 'https://tech-nokri-frontend.onrender.com', // Apne frontend ka URL specify karein
-  credentials: true // Agar cookies ya authentication tokens bhi share karne hain toh
-}));
 
 
 const PORT = 5012;
