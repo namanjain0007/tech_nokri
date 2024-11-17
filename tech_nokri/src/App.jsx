@@ -50,16 +50,20 @@ const App = () => {
   useEffect(() => {
     const checkToken = async () => {
       const token = Cookies.get("jwt");
+      console.log("andr to arr he")
+      
 
       if (!token) {
         setIsLoggedIn(false);
         setLogInData({});
+        console.log("token hi nahi he")
         return;
       }
 
       try {
         // JWT ko decode kar rahe hain
         const decodedToken = jwtDecode(token);
+        console.log("try ke andar aaya")
 
         // Expiry check kar rahe hain
         const currentTime = Date.now() / 1000; // Current time in seconds
@@ -67,10 +71,11 @@ const App = () => {
           Cookies.remove("jwt");
           setIsLoggedIn(false);
           setLogInData({});
-          console.warn("Token expired, logging out.");
+          console.log("Token expired, logging out.");
           alert("oops session expired");
           return;
         }
+        console.log("token to valid he")
 
         // Agar token valid hai, server se validate karo
         const response = await axios.get("https://tech-nokri.onrender.com/validate", {
@@ -86,7 +91,7 @@ const App = () => {
           console.log("authorized");
         }
       } catch (error) {
-        console.error("Token validation failed:", error);
+        console.log("Token validation failed:", error);
         Cookies.remove("jwt");
         setIsLoggedIn(false);
         setLogInData({});
