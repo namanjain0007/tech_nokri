@@ -43,7 +43,7 @@ const Contact = () => {
       }
       alert("message sent successfully");
     } catch (error) {
-      console.error(error.response.data.msg);
+      // console.error(error.response.data.msg);
       setErrorMessage(error.response.data.msg);
       setSuccessMessage("");
       // alert("message not delieverd");

@@ -1,5 +1,8 @@
 import "./CSS/ApplyProcess.css";
+import { NavLink, useNavigate } from "react-router-dom";
+
 const ApplyProcess = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="apply-process-area apply-bg pt-150 pb-150">
@@ -15,7 +18,7 @@ const ApplyProcess = () => {
           <div className="row">
             <div className="col-lg-4 col-md-6">
               <div className="single-process text-center mb-30">
-                <a href="http://localhost:5173/findajob">
+                <NavLink to="/findajob">
                   {/* <div className="process-ion">
                     <span className="flaticon-search"></span>
                   </div> */}
@@ -26,12 +29,12 @@ const ApplyProcess = () => {
                       tempor incididunt ut laborea.
                     </p>
                   </div>
-                </a>
+                </NavLink>
               </div>
             </div>
             <div className="col-lg-4 col-md-6">
               <div className="single-process text-center mb-30">
-                <a href="http://localhost:5173/findajob">
+                <NavLink to="/findajob">
                   {/* <div className="process-ion">
                     <span className="flaticon-curriculum-vitae"></span>
                   </div> */}
@@ -42,12 +45,12 @@ const ApplyProcess = () => {
                       tempor incididunt ut laborea.
                     </p>
                   </div>
-                </a>
+                </NavLink>
               </div>
             </div>
             <div className="col-lg-4 col-md-6">
               <div className="single-process text-center mb-30">
-                <a href="http://localhost:5173/findajob">
+                <NavLink to="/findajob">
                   {/* <div className="process-ion">
                     <span className="flaticon-tour"></span>
                   </div> */}
@@ -58,7 +61,7 @@ const ApplyProcess = () => {
                       tempor incididunt ut laborea.
                     </p>
                   </div>
-                </a>
+                </NavLink>
               </div>
             </div>
           </div>

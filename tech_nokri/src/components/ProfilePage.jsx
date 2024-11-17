@@ -3,9 +3,11 @@ import Context from "../Context/Context";
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import "./CSS/Profile_page.css"; // Import the CSS file
 // import Jobs from "./pages/Find Jobs/Jobs";
+import Cookies from "js-cookie"; // Cookie se token retrieve karne ke liye
 
 const ProfilePage = () => {
-  const { logInData, setIsLoggedIn, featuredData, jobs } = useContext(Context);
+  const { logInData, setIsLoggedIn, featuredData, jobs, setLogInData } =
+    useContext(Context);
   const [toggleSlidebar, setToggleSlidebar] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -61,8 +63,12 @@ const ProfilePage = () => {
             className="ProfilePage-btn ProfilePage-btn-danger"
             onClick={() => {
               setIsLoggedIn(false);
-              // localStorage.removeItem("isLoggedIn", "logInData");
-              localStorage.clear(); // Sare stored items ko remove karega
+              console.log("as", document.cookie);
+
+              Cookies.remove("jwt");
+              setLogInData({});
+
+              // localStorage.clear(); // Sare stored items ko remove karega
 
               navigate("/login");
             }}

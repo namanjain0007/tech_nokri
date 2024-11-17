@@ -22,23 +22,31 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials: true, // Ye line cookie ko enable karega
       });
       setSuccessMessage("Login successful");
       setErrorMessage("");
 
-      // console.log("beta", response.data.user);
+      // console.log("LOGIN response.token", response);
       // alert("User login successfully");
-      if (response.statusText == "OK") {
+      if (response.status == 200) {
+        // const profileResponse = await axios.get(
+        //   "http://localhost:5012/profile",
+        //   {
+        //     withCredentials: true, // Cookie ke saath request
+        //   }
+        // );
+        // console.log("pr", profileResponse);
         setLogInData(response.data.user);
+        // setLogInData(profileResponse.data.user);
         setTimeout(() => {
           setIsLoggedIn(true);
-          localStorage.setItem("isLoggedIn", "true");
-          localStorage.setItem("logInData", JSON.stringify(response.data.user));
+
           navigate("/");
         }, 500);
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       setErrorMessage(error.response.data.mess);
       setSuccessMessage("");
       // alert("Error login ");

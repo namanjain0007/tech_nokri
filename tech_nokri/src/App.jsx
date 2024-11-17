@@ -11,10 +11,9 @@ import FindJob from "./components/pages/FindJob";
 import Contact from "./components/pages/Contact";
 import NavBar from "./components/NavBar";
 import Login from "./components/pages/Login";
-import Register from "./components/pages/register";
+import Register from "./components/pages/Register";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-import ScrollTop from "./components/ScrollTop";
 import Footer from "./components/Footer";
 import FindJobBySearch from "./components/FindJobBySearch";
 import Page404 from "./components/pages/Page404";
@@ -25,6 +24,10 @@ import Context from "./Context/Context";
 import Preloader from "./components/Preloader";
 import PaymentGateway from "./components/pages/PaymentGateway";
 import JobRegistration from "./components/JobRegistration";
+// import { login } from "../../server/controllers/auth-controllers";
+import Cookies from "js-cookie"; // Cookie se token retrieve karne ke liye
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 const App = () => {
   const location = useLocation();
@@ -45,21 +48,71 @@ const App = () => {
   }, [location.pathname, location.search, setLoading]);
 
   useEffect(() => {
-    const loggedInStatus = localStorage.getItem("isLoggedIn");
-    const storedUser = localStorage.getItem("logInData");
+    const checkToken = async () => {
+      const token = Cookies.get("jwt");
 
-    if (loggedInStatus === "true") {
-      setIsLoggedIn(true);
-
-      if (storedUser) {
-        const userObject = JSON.parse(storedUser);
-        setLogInData(userObject);
-        // console.log("abcd", userObject);
+      if (!token) {
+        setIsLoggedIn(false);
+        setLogInData({});
+        return;
       }
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, [setIsLoggedIn, setLogInData]);
+
+      try {
+        // JWT ko decode kar rahe hain
+        const decodedToken = jwtDecode(token);
+
+        // Expiry check kar rahe hain
+        const currentTime = Date.now() / 1000; // Current time in seconds
+        if (decodedToken.exp < currentTime) {
+          Cookies.remove("jwt");
+          setIsLoggedIn(false);
+          setLogInData({});
+          console.warn("Token expired, logging out.");
+          alert("oops session expired");
+          return;
+        }
+
+        // Agar token valid hai, server se validate karo
+        const response = await axios.get("http://localhost:5012/validate", {
+          headers: {
+            Authorization: `Bearer ${token}`, // Token ko Authorization header me bhejna
+          },
+          withCredentials: true, // Cookies ko bhejna
+        });
+
+        if (response.status === 200) {
+          setIsLoggedIn(true);
+          setLogInData(response.data.user); // Server se milta user data
+          console.log("authorized");
+        }
+      } catch (error) {
+        console.error("Token validation failed:", error);
+        Cookies.remove("jwt");
+        setIsLoggedIn(false);
+        setLogInData({});
+      }
+    };
+
+    checkToken();
+  }, []);
+  // Empty dependency array, sirf mount hone par chalega
+
+  // useEffect(() => {
+  //   const loggedInStatus = localStorage.getItem("isLoggedIn");
+  //   const storedUser = localStorage.getItem("logInData");
+
+  //   if (loggedInStatus === "true") {
+  //     setIsLoggedIn(true);
+
+  //     if (storedUser) {
+  //       const userObject = JSON.parse(storedUser);
+  //       setLogInData(userObject);
+  //       // console.log("abcd", userObject);
+  //     }
+  //   } else {
+  //     setIsLoggedIn(false);
+  //   }
+  // }, [setIsLoggedIn, setLogInData]);
 
   useEffect(() => {
     // console.log("isLoggedIn: ", isLoggedIn);

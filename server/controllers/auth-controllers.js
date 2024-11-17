@@ -25,7 +25,7 @@ const register = async (req, res) => {
       courseList,
       photo,
     } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
 
     // Check if user already exists
     const userExist = await User.findOne({ email });
@@ -59,7 +59,10 @@ const register = async (req, res) => {
     });
 
     console.log(userCreated);
-    res.status(200).json({ message: userCreated });
+    res.status(200).json({
+      message: userCreated,
+      // token: (await userCreated.generateToken()) || "no data",
+    });
   } catch (error) {
     console.error("Error creating user:", error);
     res.status(500).json({ msg: "Server error" });
@@ -78,9 +81,17 @@ const login = async (req, res) => {
     const user = await bcrypt.compare(password, userExist.password);
 
     if (user) {
+      const token = await userExist.generateToken();
+      res.cookie("jwt", token, {
+        expires: new Date(Date.now() + 25892000000), // 30 days ka time set kiya gaya hai
+        httpOnly: false, // Token ko client-side JavaScript access nahi kar sakta
+      });
+
+      // console.log("ayush", res.getHeaders());
       res.status(200).json({
         msg: "Login sucessfull",
         user: userExist,
+        token: token,
       });
     } else {
       // console.log(user);
@@ -92,6 +103,17 @@ const login = async (req, res) => {
   }
 };
 
-const updateUser = async (req, res) => {};
+const getProfile = async (req, res) => {
+  try {
+    const { user } = req;
+    console.log("ayush", user);
+    return res.status(200).json({ user });
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .json({ msg: "Error fetching profile", error: err.message });
+  }
+};
 
-module.exports = { home, register, login };
+module.exports = { home, register, login, getProfile };

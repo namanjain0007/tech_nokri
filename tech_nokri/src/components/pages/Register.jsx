@@ -101,6 +101,7 @@ const Register = () => {
       setSuccessMessage("Registered successful");
       setErrorMessage("");
       // alert("User registered successfully");
+      // console.log("response.token", response);
 
       // console.log(response);
       if (response.statusText === "OK") {
@@ -109,7 +110,7 @@ const Register = () => {
         }, 500);
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       setErrorMessage(error.response.data.msg);
       setSuccessMessage("");
       // alert("Error registering user");

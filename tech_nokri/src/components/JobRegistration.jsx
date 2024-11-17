@@ -9,19 +9,18 @@ const JobRegistration = () => {
   const [successMessage, setSuccessMessage] = useState("");
 
   const [formData, setFormData] = useState({
-    job_id: featuredData.id,
-    user_id: logInData._id,
-    job_title: featuredData.title,
-    company_name: featuredData.companyName,
-    company_email: featuredData.hrEmail,
-    name: logInData.username,
-
-    email: logInData.email,
-    mobile: logInData.mobile,
-    date_of_birth: logInData.date,
-    category_id: logInData.technology,
-    experience: logInData.experience,
-    type: logInData.type,
+    job_id: featuredData?.id || "",
+    user_id: logInData?._id || "",
+    job_title: featuredData?.title || "",
+    company_name: featuredData?.companyName || "",
+    company_email: featuredData?.hrEmail || "",
+    name: logInData?.username || "",
+    email: logInData?.email || "",
+    mobile: logInData?.mobile || "",
+    date_of_birth: logInData?.date || "",
+    category_id: logInData?.technology || "",
+    experience: logInData?.experience || "",
+    type: logInData?.type || "",
     about: "",
     resume: null,
   });
@@ -73,7 +72,7 @@ const JobRegistration = () => {
         }, 500);
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
+      // console.error("Error submitting form:", error);
       // alert("Failed to submit form. Please try again.");
       setErrorMessage(error.message);
       setSuccessMessage("");

@@ -2,9 +2,11 @@ import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Context from "../Context/Context";
 import "./CSS/ProfileBtns.css";
+import Cookies from "js-cookie"; // Cookie se token retrieve karne ke liye
 
 const ProfileBtns = () => {
-  const { isLoggedIn, setIsLoggedIn, logInData } = useContext(Context);
+  const { isLoggedIn, setIsLoggedIn, logInData, setLogInData } =
+    useContext(Context);
   const navigate = useNavigate();
   const [isShowDropdown, setIsShowDropdown] = useState(false);
 
@@ -33,8 +35,9 @@ const ProfileBtns = () => {
                     className="logout-btn"
                     onClick={() => {
                       setIsLoggedIn(false);
-                      // localStorage.removeItem("isLoggedIn", "logInData");
-                      localStorage.clear(); // Sare stored items ko remove karega
+                      Cookies.remove("jwt");
+                      setLogInData({});
+                      // localStorage.clear(); // Sare stored items ko remove karega
 
                       navigate("/login");
                     }}

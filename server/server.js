@@ -2,12 +2,21 @@ const express = require("express");
 const server = express();
 
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
+
 const connectDb = require("./utils/db");
 const router = require("./router/auth-router");
 const contactRoute = require("./router/contact-router");
 const jobApplicationRouter = require("./router/job_application-router");
 
-server.use(cors());
+server.use(
+  cors({
+    origin: "http://localhost:5173", // Frontend ka URL
+    credentials: true, // Cookies allow karna
+  })
+);
+
+server.use(cookieParser());
 
 const PORT = 5012;
 
