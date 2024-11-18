@@ -104,8 +104,9 @@ const Register = () => {
       // console.log("response.token", response);
 
       // console.log(response);
-      if (response.statusText === "OK") {
+      if (response.status === 200) {
         setTimeout(() => {
+          console.log("navigate to login page")
           navigate("/login");
         }, 500);
       }
