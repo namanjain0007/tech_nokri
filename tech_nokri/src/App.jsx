@@ -50,7 +50,7 @@ const App = () => {
   useEffect(() => {
     const checkToken = async () => {
       const token = Cookies.get("jwt");
-      console.log("andr to arr he")
+      console.log("andr to arr he",token)
       
 
       if (!token) {
@@ -63,7 +63,7 @@ const App = () => {
       try {
         // JWT ko decode kar rahe hain
         const decodedToken = jwtDecode(token);
-        console.log("try ke andar aaya")
+        console.log("try ke andar aaya",decodedToken)
 
         // Expiry check kar rahe hain
         const currentTime = Date.now() / 1000; // Current time in seconds
