@@ -86,6 +86,7 @@ const login = async (req, res) => {
   httpOnly: true,
   secure: true, // HTTPS ke liye zaroori
   sameSite: "None", // Cross-origin ke liye
+  path: "/",
 });
 
       // console.log("ayush", res.getHeaders());
