@@ -85,7 +85,8 @@ const login = async (req, res) => {
       res.cookie("jwt", token, {
   httpOnly: true,
   secure: true, // HTTPS ke liye zaroori
-  sameSite: "None", // Cross-origin ke liye
+ sameSite: 'Lax', // Ensures cookie is sent with cross-origin requests
+  domain: 'onrender.com',
   path: "/",
 });
 
