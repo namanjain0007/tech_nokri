@@ -83,11 +83,9 @@ const login = async (req, res) => {
     if (user) {
       const token = await userExist.generateToken();
       res.cookie("jwt", token, {
-  httpOnly: true,
-  secure: true, // HTTPS ke liye zaroori
- sameSite: 'Lax', // Ensures cookie is sent with cross-origin requests
-  domain: 'onrender.com',
-  path: "/",
+  httpOnly: false,
+  // secure: true, // HTTPS ke liye zaroori
+ sameSite: 'None',
 });
 
       // console.log("ayush", res.getHeaders());
